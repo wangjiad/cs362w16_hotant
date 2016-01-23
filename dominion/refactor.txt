@@ -1,1 +1,5 @@
-refactor
+1. Refactored adventurer switch into separate function adventurerCard
+2. Refactored council_room switch into separate function council_roomCard
+3. Refactored feast switch into separate function feastCard
+4. Refactored remodel switch into separate function remodelCard
+5. Refactored smithy switch into separate function smithyCard
