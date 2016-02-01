@@ -1,0 +1,43 @@
+File 'dominion.c'
+Lines executed:27.04% of 651
+
+*** Starting supplyCount Unit Test. ***
+Tested if supply count was functional by manually modifying the supply count of gold.
+Simple function but you can never be to thorough.
+Test passed
+
+*** Starting numHandCards & drawCard Unit Test. ***
+Tested drawing a card and see if it effected numHandCards appropriately.
+Test passed
+
+*** Starting isGameOver Unit Test. ***
+Testing isGameOver for a valid game over situation and a invalid game over situation.
+Test passed
+
+*** Starting scoreFor Unit Test. ***
+Manually added cards to players hand, calculated the score by hand and compared it to what scoreFor returned.
+Test passed
+
+*** Starting Smithy Unit Test. ***
+Called smithy card and see if it added right amount of cards.
+Test failed, incorrect number of added cards.
+
+*** Starting village Unit Test. ***
+Tested it after calling feast it added the correct amount of cards.
+Test passed
+
+*** Great Hall Unit Test. ***
+Tested it after calling great hall it added the correct amount of cards.
+Test passed
+
+*** Steward Unit Test. ***
+Tested if case 1 and 2 or steward modifies the num of cards and coins correctly.
+Test passed
+Test passed
+
+Bug Report:
+Found a bug in smithy that adds incorrect amount of cards to hand.
+Other than that no bugs found in my unit tests.
+
+My code coverage for all these tests came out to be 27.04% of 651 lines executed.
+This percentage is quite low which indicates we have unlikely covered most edges, node and paths of the program, however I built my unit tests to test the essential functionality of each function or card, therefore if I were instead to test edge cases or uncommon cases, I would likely find more errors since these are more often not found at the initial creation of a program.
