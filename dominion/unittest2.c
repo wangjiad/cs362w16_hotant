@@ -12,7 +12,7 @@ int main (int argc, char** argv) {
   int k[10] = {adventurer, gardens, embargo, village, minion, mine, cutpurse,
 	       sea_hag, tribute, smithy};
 
-  printf ("Starting numHandCards & drawCard Unit Test.\n");
+  printf ("*** Starting numHandCards & drawCard Unit Test. ***\n");
   int r = initializeGame(2, k, 123, &G);
   //assert that num cards is equal to 5
   int numCards = numHandCards(&G);

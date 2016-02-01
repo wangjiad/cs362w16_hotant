@@ -11,7 +11,7 @@ int main (int argc, char** argv) {
   int k[10] = {adventurer, gardens, embargo, village, minion, mine, cutpurse,
 	       sea_hag, tribute, smithy};
 
-  printf ("Starting scoreFor Unit Test.\n");
+  printf ("*** Starting scoreFor Unit Test. ***\n");
   int r = initializeGame(2, k, 123, &G);
 
   printf("Placing 1 curse, 1 estate, 1 duchy, 1 province, and 1 great hall in hand.\nTotal points should be 10.\n");

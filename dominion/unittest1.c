@@ -11,7 +11,7 @@ int main (int argc, char** argv) {
   int k[10] = {adventurer, gardens, embargo, village, minion, mine, cutpurse,
 	       sea_hag, tribute, smithy};
 
-  printf ("Starting supplyCount Unit Test.\n");
+  printf ("*** Starting supplyCount Unit Test. ***\n");
   int goldSupply = 0;
   int r = initializeGame(2, k, 123, &G);
   //set gold supply to 5
