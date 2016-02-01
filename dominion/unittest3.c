@@ -27,18 +27,21 @@ int main (int argc, char** argv) {
   assert(status == 1);
   //set supply count of all cards to 10
   int i;
-  for (i = 0; i < 25; i++){
+  for (i = 0; i <25; i++){
       G.supplyCount[i] = 10;
-      //printf("Supply[%i]: %i\n", i, G.supplyCount[i]);
+      printf("Supply[%i]: %i\n", i, G.supplyCount[i]);
 	}
+  printf("Testing if game is over.\n");
   //assert game is not over
   status = isGameOver(&G);
   assert(status == 0);
+  printf("Setting 3 stacks to 0\n");
   //set 3 supply cards to 0
-  for (i = 5; i < 9; i++){
+  for (i = 5; i < 8; i++){
       G.supplyCount[i] = 0;
-      //printf("Supply[%i]: %i\n", i, G.supplyCount[i]);
+      printf("Supply[%i]: %i\n", i, G.supplyCount[i]);
   }
+  printf("Testing if game is over.\n");
   //assert game is over
   status = isGameOver(&G);
   assert(status == 1);

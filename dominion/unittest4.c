@@ -14,6 +14,7 @@ int main (int argc, char** argv) {
   printf ("Starting scoreFor Unit Test.\n");
   int r = initializeGame(2, k, 123, &G);
 
+  printf("Placing 1 curse, 1 estate, 1 duchy, 1 province, and 1 great hall in hand.\nTotal points should be 10.\n");
   G.hand[1][0] = curse; //-1
   G.hand[1][1] = estate; //+1
   G.hand[1][2] = duchy; //+3
@@ -21,8 +22,9 @@ int main (int argc, char** argv) {
   G.hand[1][4] = great_hall; //+1
   G.handCount[1] = 5;
   //total = 10
+  printf("Calling scoreFor.\n");
   int score = scoreFor(1,&G);
-  printf("score %i\n", score);
+  printf("Score: %i\n", score);
   assert(score == 10);
 
   printf("Test passed\n");
