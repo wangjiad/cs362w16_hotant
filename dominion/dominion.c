@@ -643,9 +643,9 @@ int getCost(int cardNumber)
   return -1;
 }
 
-int adventurerCard(struct gameState *state){
+int adventurerCard(int currentPlayer, struct gameState *state){
   int drawntreasure=0;
-  int currentPlayer = whoseTurn(state);
+  // int currentPlayer = whoseTurn(state);
   int cardDrawn;
   int temphand[MAX_HAND];// moved above the if statement
   int z = 0;// this is the counter for the temp hand
@@ -671,8 +671,8 @@ int adventurerCard(struct gameState *state){
   return 0;
 }
 
-int council_roomCard(struct gameState *state, int handPos){
-  int currentPlayer = whoseTurn(state);
+int council_roomCard(int currentPlayer, struct gameState *state, int handPos){
+  // int currentPlayer = whoseTurn(state);
   int i;
   //+4 Cards
   for (i = 0; i < 4; i++){
@@ -695,8 +695,8 @@ int council_roomCard(struct gameState *state, int handPos){
   return 0;
 }
 
-int feastCard(struct gameState *state, int choice1){
-  int currentPlayer = whoseTurn(state);
+int feastCard(int currentPlayer, struct gameState *state, int choice1){
+  // int currentPlayer = whoseTurn(state);
   int temphand[MAX_HAND];// moved above the if statement
   int i;
   int x;
@@ -753,8 +753,8 @@ int feastCard(struct gameState *state, int choice1){
   return 0;
 }
 
-int remodelCard(struct gameState *state, int choice1, int choice2, int handPos){
-  int currentPlayer = whoseTurn(state);
+int remodelCard(int currentPlayer, struct gameState *state, int choice1, int choice2, int handPos){
+  // int currentPlayer = whoseTurn(state);
   int nextPlayer = currentPlayer + 1;
   int i;
   int j;
@@ -783,11 +783,11 @@ int remodelCard(struct gameState *state, int choice1, int choice2, int handPos){
   return 0;
 }
 
-int smithyCard(struct gameState *state, int handPos){
-  int currentPlayer = whoseTurn(state);
+int smithyCard(int currentPlayer, struct gameState *state, int handPos){
+  // int currentPlayer = whoseTurn(state);
   int i;
   //+3 Cards
-  for (i = 1; i < 3; i++)
+  for (i = 0; i < 3; i++)
     {
     drawCard(currentPlayer, state);
     }
@@ -820,13 +820,13 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
   switch( card )
     {
     case adventurer:
-      return adventurerCard(state); //refactor
+      return adventurerCard(currentPlayer, state); //refactor
 
     case council_room:
-      return council_roomCard(state, handPos); //refactor
+      return council_roomCard(currentPlayer, state, handPos); //refactor
 
     case feast:
-      return feastCard(state, choice1); //refactor
+      return feastCard(currentPlayer, state, choice1); //refactor
 
     case gardens:
       return -1;
@@ -867,10 +867,10 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
       return 0;
 
     case remodel:
-      return remodelCard(state, choice1, choice2, handPos); //refactor
+      return remodelCard(currentPlayer, state, choice1, choice2, handPos); //refactor
 
     case smithy:
-      return smithyCard(state, handPos); //refactor
+      return smithyCard(currentPlayer, state, handPos); //refactor
 
     case village:
       //+1 Card
