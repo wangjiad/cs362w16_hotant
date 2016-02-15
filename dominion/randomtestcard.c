@@ -5,7 +5,7 @@
 #include "rngs.h"
 #include <stdlib.h>
 
-#define MAX_TESTS 10000
+#define MAX_TESTS 10
 
 int main (int argc, char** argv) {
   //testing steward
