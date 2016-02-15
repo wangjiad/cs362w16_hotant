@@ -1,0 +1,54 @@
+-------------------------------------
+*** Starting Steward Random Test ***
+numCards before: 5
+Using steward with choice = 1
+numCards after: 6
+*************
+numCards before: 6
+numCards after: 6
+Coins before: 3
+Using steward with choice = 2
+Coins after: 5
+*************
+numCards before: 5
+Using steward with choice = 3
+numCards after: 2
+-------------------------------------
+*** Starting Steward Random Test ***
+numCards before: 165
+Using steward with choice = 1
+numCards after: 166
+*************
+numCards before: 166
+numCards after: 166
+Coins before: 5
+Using steward with choice = 2
+Coins after: 7
+*************
+numCards before: 165
+Using steward with choice = 3
+numCards after: 162
+-------------------------------------
+*** Starting Steward Random Test ***
+numCards before: 229
+Using steward with choice = 1
+numCards after: 230
+*************
+numCards before: 230
+numCards after: 230
+Coins before: 7
+Using steward with choice = 2
+Coins after: 9
+*************
+numCards before: 229
+Using steward with choice = 3
+numCards after: 226
+-------------------------------------
+Tests passed: 9
+Tests fails: 0
+profiling: /Users/tylerhotan/cs362w16_hotant/dominion/randomtestcard.gcda: cannot merge previous GCDA file: mismatched number of counters (38)
+profiling: /Users/tylerhotan/cs362w16_hotant/dominion/randomtestcard.gcda: cannot merge previous run count: corrupt object tag (0x00000003)
+File 'dominion.c'
+Lines executed:24.15% of 646
+dominion.c:creating 'dominion.c.gcov'
+
