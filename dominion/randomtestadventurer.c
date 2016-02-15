@@ -1,114 +1,53 @@
+#include "assert.h"
 #include "dominion.h"
-#include "rngs.h"
+#include "interface.c"
 #include <stdio.h>
-#include <math.h>
+#include "rngs.h"
 #include <stdlib.h>
-#include <assert.h>
 
-#define MAX_TESTS 12
+#define MAX_TESTS 10000
 
-//This randomly tests Adventurer
+int main (int argc, char** argv) {
+  //testing steward
+  struct gameState G;
 
-int main() {
+  int i, j, players, player, handCount, deckCount, discardCount, handPos, difference, numActions, seed, coinBefore, coinAfter, testPass, testFail;
 
-	  int k[10] = {adventurer, gardens, embargo, village, minion, mine, cutpurse,
+  int k[10] = {adventurer, gardens, embargo, village, minion, mine, cutpurse,
 	       sea_hag, tribute, smithy};
 
-	  int i, j, n, players, player, handCount, deckCount, seed, address;
-	  //struct gameState state;
-	  struct gameState state;
-	  struct gameState stat;
-	  struct gameState sta;
+  for (i = 0; i < MAX_TESTS; i++)
+  {
+    //printf("-------------------------------------\n");
+    players = (rand() % 4) + 1;
+		player = rand() % players;
+		seed = rand();
+		initializeGame(players, k, seed, &G);
 
-	  printf("Running Random Adventurer Test\n");
+    G.deckCount[player] = rand() % MAX_DECK; //Pick random deck size out of MAX DECK size
+		G.discardCount[player] = rand() % MAX_DECK;
+		G.handCount[player] = rand() % MAX_HAND;
 
-	  /*
-										--- Author's Note ---
-	  So, I had problems running out of memory when I used the same gameState variable more than 12 times, and
-	  I honestly don't know why. I momentarily solved this problem by adding more for loops and creating more gamestates;
-	  I was still able to get decent coverage, though not up to the amount of tests I originally had in mind.
+		//Copy state variables
+		handCount = G.handCount[player];
+		deckCount = G.deckCount[player];
 
-	  */
+    if (seed % 3 == 0) {
+      G.deckCount[player] = 0;
+    }
 
-	  for (i = 0; i < MAX_TESTS; i++) {
+    int numCards = numHandCards(&G);
+    //printf("numCards before: %i\n", numCards);
+    cardEffect(adventurer, 0,0,0, &G ,0,0);
+    int numCardsAfter = numHandCards(&G);
+    //printf("numCards after: %i\n", numCardsAfter);
 
-	   players = rand() % 4;
-
-	   seed = rand();		//pick random seed
-
-	   initializeGame(players, k, seed, &state);	//initialize Gamestate
-
-	   //Initiate valid state variables
-		  state.deckCount[player] = rand() % MAX_DECK; //Pick random deck size out of MAX DECK size
-		  state.discardCount[player] = rand() % MAX_DECK;
-		  state.handCount[player] = rand() % MAX_HAND;
-
-
-		  //Copy state variables
-		  handCount = state.handCount[player];
-		  deckCount = state.deckCount[player];
-
-		  //1 in 3 chance of making empty deck for coverage
-		  if (seed % 3 == 0) {
-
-			state.deckCount[player] = 0;
-		  }
-		  cardEffect(adventurer, 1, 1, 1, &state);		//Run adventurer card
-	  }
-
-	   for (i = 0; i < MAX_TESTS; i++) {
-
-  		  players = rand() % 4;
-		  seed = rand();		//pick random seed
-
-		  initializeGame(players, k, seed, &stat);	//initialize Gamestate
-
-		  //Initiate valid state variables
-		  stat.deckCount[player] = rand() % MAX_DECK; //Pick random deck size out of MAX DECK size
-		  stat.discardCount[player] = rand() % MAX_DECK;
-		  stat.handCount[player] = rand() % MAX_HAND;
-
-
-		  //Copy state variables
-		  handCount = stat.handCount[player];
-		  deckCount = stat.deckCount[player];
-
-		  //1 in 3 chance of making empty deck for coverage
-		  if (seed % 3 == 0) {
-
-			stat.deckCount[player] = 0;
-		  }
-
-		  cardEffect(adventurer, 1, 1, 1, &stat);		//Run adventurer card
-	  }
-
-	   for (i = 0; i < MAX_TESTS; i++) {
-
-  		  players = rand() % 4;
-		  seed = rand();		//pick random seed
-
-		  initializeGame(players, k, seed, &sta);	//initialize Gamestate
-
-		  //Initiate valid state variables
-		  sta.deckCount[player] = rand() % MAX_DECK; //Pick random deck size out of MAX DECK size
-		  sta.discardCount[player] = rand() % MAX_DECK;
-		  sta.handCount[player] = rand() % MAX_HAND;
-
-
-		  //Copy state variables
-		  handCount = sta.handCount[player];
-		  deckCount = sta.deckCount[player];
-
-		  //1 in 3 chance of making empty deck for coverage
-		  if (seed % 3 == 0) {
-
-			sta.deckCount[player] = 0;
-		  }
-		  cardEffect(adventurer, 1, 1, 1, &sta);		//Run adventurer card
-
-	   }
-
-	  printf("Tests Complete\n");
-
-	  return 0;
+    if(numCardsAfter - numCards == 2){
+      testPass++;
+    } else testFail++;
+  }
+  //printf("-------------------------------------\n");
+  printf("Tests passed: %i\n", testPass);
+  printf("Tests fails: %i\n", testFail);
+  return 0;
 }
