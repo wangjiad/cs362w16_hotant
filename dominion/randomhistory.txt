@@ -1,0 +1,6 @@
+Write up the development of your random testers, including improvements coverage and efforts to check the correctness of your specification by breaking the code, as randomhistory.txt:
+
+gcov adventurer: Lines executed:25.00% of 576
+
+
+gcov steward: Lines executed:25.35% of 576
