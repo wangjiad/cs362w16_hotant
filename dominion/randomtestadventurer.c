@@ -5,7 +5,7 @@
 #include "rngs.h"
 #include <stdlib.h>
 
-#define MAX_TESTS 10
+#define MAX_TESTS 1000
 
 int main (int argc, char** argv) {
   //testing steward
@@ -27,6 +27,18 @@ int main (int argc, char** argv) {
     G.deckCount[player] = rand() % MAX_DECK; //Pick random deck size out of MAX DECK size
 		G.discardCount[player] = rand() % MAX_DECK;
 		G.handCount[player] = rand() % MAX_HAND;
+
+    for (j = 0; j < G.deckCount[player]; j++) {
+      G.deck[player][j] = rand() % (treasure_map + 1);
+    }
+    for (j = 0; j < G.handCount[player]; j++) {
+      G.hand[player][j] = rand() % (treasure_map + 1);
+    }
+    for (j = 0; j < G.discardCount[player]; j++) {
+      G.discard[player][j] = rand() % (treasure_map + 1);
+    }
+
+    G.hand[player][0] = adventurer;
 
 		//Copy state variables
 		handCount = G.handCount[player];

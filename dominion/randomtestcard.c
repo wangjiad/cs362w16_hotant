@@ -5,7 +5,7 @@
 #include "rngs.h"
 #include <stdlib.h>
 
-#define MAX_TESTS 10
+#define MAX_TESTS 1000
 
 int main (int argc, char** argv) {
   //testing steward
@@ -28,6 +28,18 @@ int main (int argc, char** argv) {
     G.deckCount[player] = rand() % MAX_DECK; //Pick random deck size out of MAX DECK size
 		G.discardCount[player] = rand() % MAX_DECK;
 		G.handCount[player] = rand() % MAX_HAND;
+
+    for (j = 0; j < G.deckCount[player]; j++) {
+      G.deck[player][j] = rand() % (treasure_map + 1);
+    }
+    for (j = 0; j < G.handCount[player]; j++) {
+      G.hand[player][j] = rand() % (treasure_map + 1);
+    }
+    for (j = 0; j < G.discardCount[player]; j++) {
+      G.discard[player][j] = rand() % (treasure_map + 1);
+    }
+
+    G.hand[player][0] = steward;
 
 		//Copy state variables
 		handCount = G.handCount[player];
@@ -53,6 +65,8 @@ int main (int argc, char** argv) {
     numCardsAfter = numHandCards(&G);
     //printf("numCards after: %i\n", numCardsAfter);
 
+    G.hand[player][0] = steward;
+
     //printf("Coins before: %i\n", G.coins);
     coinBefore = G.coins;
     //printf("Using steward with choice = 2\n");
@@ -63,6 +77,8 @@ int main (int argc, char** argv) {
       testPass++;
     } else testFail++;
     //printf("Test passed\n");
+
+    G.hand[player][0] = steward;
 
     //printf("*************\n");
     numCards = numHandCards(&G);
