@@ -16,9 +16,9 @@ int main (int argc, char** argv) {
   struct gameState *G = newGame();
   srand(time(NULL));
   //removed f
-  int allKingdomCards[20] = {gardens, adventurer, council_room, great_hall, mine, remodel, smithy, village, baron, minion, steward, tribute, ambassador, cutpurse, embargo, outpost, salvager, sea_hag, treasure_map};
+  int allKingdomCards[20] = {gardens, adventurer, council_room, great_hall, mine, remodel, smithy, village, baron, minion, steward, tribute, ambassador, cutpurse, embargo, outpost, salvager, sea_hag, treasure_map}; //initialize an array of all possible kingdom cards
 
-  arrayShuffle(allKingdomCards, 20);
+  arrayShuffle(allKingdomCards, 20); //shuffle it and access it 0 to 9, this is our kingdom cards for the game
   int k[10];
   for (int i = 0; i < 10; i++)
   		k[i] = allKingdomCards[i];
@@ -58,6 +58,7 @@ int main (int argc, char** argv) {
      player = whoseTurn(G);
      printf("It's player %i's turn.\n", player);
      printHand(player, G);
+     //ACTION PHASE BEGIN
      printf("Number of Actions: %i\n", G->numActions);
 
      printf("Searching through hand for an action to play...\n");
@@ -77,7 +78,7 @@ int main (int argc, char** argv) {
            }
         }
      }
-
+     //need to mess with the choices still..*****
      if (actionFlag == 1){
        playChoice = rand() % 1; //50% chance to play or not
        if (playChoice == 0){
@@ -92,7 +93,7 @@ int main (int argc, char** argv) {
      if (actionFlag == 0){
        printf("No actions found, end action phase and start buy phase\n");
      }
-
+     //BUY PHASE BEGIN
      printf("Number of Buys: %i\n", G->numBuys);
      //1 in 3 chance to either buy action/treasure/or victory card
      //1 in 3 change to try and buy copper silver or gold, same for estate duchy or province
