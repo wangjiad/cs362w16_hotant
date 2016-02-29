@@ -441,7 +441,8 @@ int scoreFor (int player, struct gameState *state) {
     }
 
   //score from deck
-  for (i = 0; i < state->discardCount[player]; i++)
+  //THIS WAS DISCARD COUNT NOT DECK COUNT
+  for (i = 0; i < state->deckCount[player]; i++)
     {
       if (state->deck[player][i] == curse) { score = score - 1; };
       if (state->deck[player][i] == estate) { score = score + 1; };
@@ -755,7 +756,7 @@ int feastCard(int currentPlayer, struct gameState *state, int choice1){
 
 int remodelCard(int currentPlayer, struct gameState *state, int choice1, int choice2, int handPos){
   // int currentPlayer = whoseTurn(state);
-  int nextPlayer = currentPlayer + 1;
+  // int nextPlayer = currentPlayer + 1;
   int i;
   int j;
 

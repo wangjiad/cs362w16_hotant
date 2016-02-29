@@ -15,8 +15,8 @@ int main (int argc, char** argv) {
   //testing steward
   struct gameState *G = newGame();
   srand(time(NULL));
-
-  int allKingdomCards[20] = {gardens, adventurer, council_room, feast, great_hall, mine, remodel, smithy, village, baron, minion, steward, tribute, ambassador, cutpurse, embargo, outpost, salvager, sea_hag, treasure_map};
+  //removed f
+  int allKingdomCards[20] = {gardens, adventurer, council_room, great_hall, mine, remodel, smithy, village, baron, minion, steward, tribute, ambassador, cutpurse, embargo, outpost, salvager, sea_hag, treasure_map};
 
   arrayShuffle(allKingdomCards, 20);
   int k[10];
@@ -25,11 +25,10 @@ int main (int argc, char** argv) {
 
   int seed = rand();
   int i;
-  int j;
   int init;
   int player;
 
-  int playerNum = (rand() % 2) + 2;//initialize random num players
+  int playerNum = (rand() % 3) + 2;//initialize random num players
 
   printf("Starting Random Game Test!\n");
   printf("Number of Players: %i\n", playerNum);
@@ -48,7 +47,11 @@ int main (int argc, char** argv) {
   int actionFlag = 0;
   int buyResult;
   int cardToPlay;
+  int playChoice;
   int handPos = 0;
+  int ATV = 0; //action treasure or victory
+  int CSG = 0; //copper silver or gold
+  int EDP = 0; //estate duchy or province
 
   printf("--------------END INITIALIZATION----------------\n");
   while (!isGameOver(G)){
@@ -59,10 +62,12 @@ int main (int argc, char** argv) {
 
      printf("Searching through hand for an action to play...\n");
      int x = 0;
+
+     //search hand for action
      for (x = 0; x < G->handCount[player]; x++){
         for (i = 0; i < 10; i++){
            if(k[i] == G->hand[player][x]){
-             printf("Playing an action called %s from hand position %i\n", cardName(k[i]), x);
+             printf("Found an action called %s from hand position %i\n", cardName(k[i]), x);
              cardToPlay = k[i];
              handPos = x;
              actionFlag = 1;
@@ -72,38 +77,112 @@ int main (int argc, char** argv) {
            }
         }
      }
-     if (actionFlag == 1){
-       playCard(handPos, 1, 1, 1, G);
-     }
-     //add if else to play action of not based on random
 
+     if (actionFlag == 1){
+       playChoice = rand() % 1; //50% chance to play or not
+       if (playChoice == 0){
+         printf("Player decided to play the action card\n");
+         playCard(handPos, 0, 0, 0, G);
+       } else {
+         printf("Player decided to not play the action card\n");
+       }
+     }
+
+     //if there are no action cards in the hand
      if (actionFlag == 0){
-       printf("No actions found, end action phase, start buy phase\n");
+       printf("No actions found, end action phase and start buy phase\n");
      }
 
      printf("Number of Buys: %i\n", G->numBuys);
-     int buyPos = rand() % 10; //randomize spot to buy from
-     printf("Player wants to buy %s\n", cardName(k[buyPos]));
-     buyResult = buyCard(k[buyPos], G);
-     if (buyResult != 0){
-       printf("Buy Unsuccessful\n");
-     } else {
-       printf("Buy successful\n");
+     //1 in 3 chance to either buy action/treasure/or victory card
+     //1 in 3 change to try and buy copper silver or gold, same for estate duchy or province
+     ATV = rand() % 3;
+
+     if(ATV == 0){//try to buy an action card
+       CSG = rand() % 3;//randomize whether its copper gold of silver
+       if (CSG == 0){//copper
+         printf("Player wants to buy %s\n", cardName(4));
+         buyResult = buyCard(4, G);
+         if (buyResult != 0){
+           printf("Buy Unsuccessful\n");
+         } else {
+           printf("Buy successful\n");
+         }
+       }else if (CSG == 1){//silver
+         printf("Player wants to buy %s\n", cardName(5));
+         buyResult = buyCard(5, G);
+         if (buyResult != 0){
+           printf("Buy Unsuccessful\n");
+         } else {
+           printf("Buy successful\n");
+         }
+       }else{//gold
+         printf("Player wants to buy %s\n", cardName(6));
+         buyResult = buyCard(6, G);
+         if (buyResult != 0){
+           printf("Buy Unsuccessful\n");
+         } else {
+           printf("Buy successful\n");
+         }
+       }
+     }else if(ATV == 1){ //try to buy a treasure card
+       EDP = rand() % 3;//randomize whether its copper gold of silver
+       if (CSG == 0){//estate
+         printf("Player wants to buy %s\n", cardName(1));
+         buyResult = buyCard(1, G);
+         if (buyResult != 0){
+           printf("Buy Unsuccessful\n");
+         } else {
+           printf("Buy successful\n");
+         }
+       }else if (CSG == 1){//duchy
+         printf("Player wants to buy %s\n", cardName(2));
+         buyResult = buyCard(2, G);
+         if (buyResult != 0){
+           printf("Buy Unsuccessful\n");
+         } else {
+           printf("Buy successful\n");
+         }
+       }else{//province
+         printf("Player wants to buy %s\n", cardName(3));
+         buyResult = buyCard(3, G);
+         if (buyResult != 0){
+           printf("Buy Unsuccessful\n");
+         } else {
+           printf("Buy successful\n");
+         }
+       }
+     }else{ //try to buy a kingdom card
+       int buyPos = rand() % 10; //randomize spot to buy from
+       printf("Player wants to buy %s\n", cardName(k[buyPos]));
+       //try to buy the card
+       buyResult = buyCard(k[buyPos], G);
+
+       if (buyResult != 0){
+         printf("Buy Unsuccessful\n");
+       } else {
+         printf("Buy successful\n");
+       }
      }
 
+     //  printSupply(G);
      endTurn(G);
-     //  printDeck(player, G);
-     //  printDiscard(player, G);
-     printf ("Player 0: %d\nPlayer 1: %d\n", scoreFor(0, G), scoreFor(1, G));
+     printDeck(player, G);
+     printDiscard(player, G);
+     printf ("Player 0: %d\nPlayer 1: %d\nPlayer 2: %d\nPlayer 3: %d\n", scoreFor(0, G), scoreFor(1, G),scoreFor(2, G),scoreFor(3, G));
      printf("----------------END TURN--------------------\n");
      actionFlag = 0;
   }
+
   printf ("Finished game.\n");
-  printf ("Player 0: %d\nPlayer 1: %d\n", scoreFor(0, G), scoreFor(1, G));
-  printf("Kingdom Cards Are: ");
-  for (i = 0; i < 10; i++){
-      printf("|%s", cardName(k[i]));
-  }
+  printf("Number of Players: %i\n", playerNum);
+
+  printf ("Player 0: %d\nPlayer 1: %d\nPlayer 2: %d\nPlayer 3: %d\n", scoreFor(0, G), scoreFor(1, G),scoreFor(2, G),scoreFor(3, G));
+  printSupply(G);
+  // printf("Kingdom Cards Are: ");
+  // for (i = 0; i < 10; i++){
+  //     printf("|%s", cardName(k[i]));
+  // }
   printf("\n");
 }
 
