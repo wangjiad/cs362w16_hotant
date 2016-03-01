@@ -79,7 +79,7 @@ int main (int argc, char** argv) {
            }
         }
      }
-     //need to mess with the choices still
+     
      if (actionFlag == 1){
        playChoice = rand() % 1; //50% chance to play or not
        if (playChoice == 0){
