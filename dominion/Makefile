@@ -31,6 +31,12 @@ testdom: runTestDominion
 	gcov dominion.c >> testdominion.out
 	cat dominion.c.gcov >> testdominion.out
 
+testdomdiff: runTestDominion
+	./testdominion &> gameResults.out
+
+testdomdiff2: runTestDominion
+	./testdominion &> gameResults2.out
+
 playdom: dominion.o playdom.c
 	gcc -o playdom playdom.c -g dominion.o rngs.o $(CFLAGS)
 

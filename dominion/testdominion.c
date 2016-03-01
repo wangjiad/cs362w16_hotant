@@ -14,7 +14,7 @@ const char* cardName(int cardNum);
 int main (int argc, char** argv) {
   struct gameState *G = newGame();
   srand(time(NULL));
-  //removed f
+  //no f
   int allKingdomCards[20] = {gardens, adventurer, council_room, great_hall, mine, remodel, smithy, village, baron, minion, steward, tribute, ambassador, cutpurse, embargo, outpost, salvager, sea_hag, treasure_map}; //initialize an array of all possible kingdom cards
 
   arrayShuffle(allKingdomCards, 20); //shuffle it and access it 0 to 9, this is our kingdom cards for the game
@@ -56,13 +56,12 @@ int main (int argc, char** argv) {
   int numTurns = 0; //keep track of number of turns
 
   printf("-----------------[END INITIALIZATION]-----------------\n");
-  while (!isGameOver(G)){
+  while (!isGameOver(G)){ //till game is over
      player = whoseTurn(G);
      printf("It's player %i's turn.\n", player);
      printHand(player, G);
      //ACTION PHASE BEGIN
      printf("Number of Actions: %i\n", G->numActions);
-
      printf("Searching through hand for an action to play...\n");
      int x = 0;
 
@@ -80,7 +79,7 @@ int main (int argc, char** argv) {
            }
         }
      }
-     //need to mess with the choices still..*****
+     //need to mess with the choices still
      if (actionFlag == 1){
        playChoice = rand() % 1; //50% chance to play or not
        if (playChoice == 0){
@@ -99,6 +98,7 @@ int main (int argc, char** argv) {
      printf("Number of Buys: %i\n", G->numBuys);
      numBuyAttempts = G->numBuys;
 
+     //probabilities
      //1 in 3 chance to either buy action/treasure/or victory card
      //1 in 3 change to try and buy copper silver or gold, same for estate duchy or province
      //1 in 2 chance to decide to attempt buy or not buy
@@ -112,7 +112,7 @@ int main (int argc, char** argv) {
          ATV = rand() % 3;
          if(ATV == 0){//try to buy an action card
            CSG = rand() % 3;//randomize whether its copper gold of silver
-           if (CSG == 0){//copper
+           if (CSG == 0){//copper chosen
              printf("Player wants to buy %s\n", cardName(4));
              buyResult = buyCard(4, G);
              if (buyResult != 0){
@@ -122,7 +122,7 @@ int main (int argc, char** argv) {
                printf("Buy successful\n\n");
                numBuyAttempts--;
              }
-           }else if (CSG == 1){//silver
+           }else if (CSG == 1){//silver chose
              printf("Player wants to buy %s\n", cardName(5));
              buyResult = buyCard(5, G);
              if (buyResult != 0){
@@ -132,7 +132,7 @@ int main (int argc, char** argv) {
                printf("Buy successful\n\n");
                numBuyAttempts--;
              }
-           }else{//gold
+           }else{//gold chosen
              printf("Player wants to buy %s\n", cardName(6));
              buyResult = buyCard(6, G);
              if (buyResult != 0){
@@ -145,7 +145,7 @@ int main (int argc, char** argv) {
            }
          }else if(ATV == 1){ //try to buy a treasure card
            EDP = rand() % 3;//randomize whether its copper gold of silver
-           if (CSG == 0){//estate
+           if (CSG == 0){//estate chosen
              printf("Player wants to buy %s\n", cardName(1));
              buyResult = buyCard(1, G);
              if (buyResult != 0){
@@ -155,7 +155,7 @@ int main (int argc, char** argv) {
                printf("Buy successful\n\n");
                numBuyAttempts--;
              }
-           }else if (CSG == 1){//duchy
+           }else if (CSG == 1){//duchy chosen
              printf("Player wants to buy %s\n", cardName(2));
              buyResult = buyCard(2, G);
              if (buyResult != 0){
@@ -165,7 +165,7 @@ int main (int argc, char** argv) {
                printf("Buy successful\n\n");
                numBuyAttempts--;
              }
-           }else{//province
+           }else{//province chosen
              printf("Player wants to buy %s\n", cardName(3));
              buyResult = buyCard(3, G);
              if (buyResult != 0){
