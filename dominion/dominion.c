@@ -756,7 +756,7 @@ int feastCard(int currentPlayer, struct gameState *state, int choice1){
 
 int remodelCard(int currentPlayer, struct gameState *state, int choice1, int choice2, int handPos){
   // int currentPlayer = whoseTurn(state);
-  // int nextPlayer = currentPlayer + 1;
+  currentPlayer = currentPlayer + 1;
   int i;
   int j;
 
@@ -788,7 +788,7 @@ int smithyCard(int currentPlayer, struct gameState *state, int handPos){
   // int currentPlayer = whoseTurn(state);
   int i;
   //+3 Cards
-  for (i = 0; i < 3; i++)
+  for (i = 1; i < 3; i++)
     {
     drawCard(currentPlayer, state);
     }
