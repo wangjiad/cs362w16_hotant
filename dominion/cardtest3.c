@@ -11,7 +11,7 @@ int main (int argc, char** argv) {
   int k[10] = {adventurer, gardens, embargo, village, minion, mine, cutpurse,
 	       sea_hag, tribute, smithy};
 
-  printf ("*** Starting Great Hall Unit Test. ***\n");
+  printf ("\n*** Starting Great Hall Unit Test. ***\n");
   int r = initializeGame(2, k, 123, &G);
 
   int numActions = G.numActions;
@@ -28,8 +28,11 @@ int main (int argc, char** argv) {
   int numCardsAfter = numHandCards(&G);
   printf("numCards after: %i\n", numCardsAfter);
   assert(numCardsAfter == numCards);
-  assert(numActionsAfter - numActions == 1);
-  printf("Test passed\n");
+  if(numActionsAfter - numActions == 1){
+    printf("Test passed\n");
+  } else {
+    printf("Test failed\n");
+  }
 
   assert (r == 0);
   return 0;

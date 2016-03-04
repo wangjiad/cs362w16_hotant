@@ -31,6 +31,19 @@ testdom: runTestDominion
 	gcov dominion.c >> testdominion.out
 	cat dominion.c.gcov >> testdominion.out
 
+testSuite: runTestDominion adventurer randomcard unit1 unit2 unit3 unit4 card1 card2 card3 card4 
+	./testdominion &> fulltest.out
+	./unittest1 >> fulltest.out
+	./unittest2 >> fulltest.out
+	./unittest3 >> fulltest.out
+	./unittest4 >> fulltest.out
+	./cardtest1 >> fulltest.out
+	./cardtest2 >> fulltest.out
+	./cardtest3 >> fulltest.out
+	./cardtest4 >> fulltest.out
+	./randomtestcard >> fulltest.out
+	./randomtestadventurer >> fulltest.out
+
 testdomdiff: runTestDominion
 	./testdominion &> gameResults.out
 

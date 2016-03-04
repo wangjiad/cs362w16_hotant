@@ -59,7 +59,7 @@ int main (int argc, char** argv) {
   while (!isGameOver(G)){ //till game is over
      player = whoseTurn(G);
      printf("It's player %i's turn.\n", player);
-     printHand(player, G);
+     //printHand(player, G);
      //ACTION PHASE BEGIN
      printf("Number of Actions: %i\n", G->numActions);
      printf("Searching through hand for an action to play...\n");
@@ -79,7 +79,7 @@ int main (int argc, char** argv) {
            }
         }
      }
-     
+
      if (actionFlag == 1){
        playChoice = rand() % 1; //50% chance to play or not
        if (playChoice == 0){

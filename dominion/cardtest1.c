@@ -11,7 +11,7 @@ int main (int argc, char** argv) {
   int k[10] = {adventurer, gardens, embargo, village, minion, mine, cutpurse,
 	       sea_hag, tribute, smithy};
 
-  printf ("*** Starting Smithy Unit Test. ***\n");
+  printf ("\n*** Starting Smithy Unit Test. ***\n");
   int r = initializeGame(2, k, 123, &G);
 
 

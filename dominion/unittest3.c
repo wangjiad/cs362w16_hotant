@@ -11,7 +11,7 @@ int main (int argc, char** argv) {
   int k[10] = {adventurer, gardens, embargo, village, minion, mine, cutpurse,
 	       sea_hag, tribute, smithy};
 
-  printf ("*** Starting isGameOver Unit Test. ***\n");
+  printf ("\n*** Starting isGameOver Unit Test. ***\n");
   int r = initializeGame(2, k, 123, &G);
 
   int provinceCount = G.supplyCount[province];
@@ -44,9 +44,13 @@ int main (int argc, char** argv) {
   printf("Testing if game is over.\n");
   //assert game is over
   status = isGameOver(&G);
-  assert(status == 1);
+  if (status == 1){
 
-  printf("Test passed\n");
+    printf("Test passed\n");
+  } else {
+    printf("Test failed\n");
+
+  }
 
   assert (r == 0);
   return 0;
