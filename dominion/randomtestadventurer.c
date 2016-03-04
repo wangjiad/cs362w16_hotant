@@ -10,12 +10,14 @@
 int main (int argc, char** argv) {
   //testing steward
   struct gameState G;
+    srand(time(NULL));
 
   int i, j, players, player, handCount, deckCount, discardCount, handPos, difference, numActions, seed, coinBefore, coinAfter, testPass, testFail;
 
   int k[10] = {adventurer, gardens, embargo, village, minion, mine, cutpurse,
 	       sea_hag, tribute, smithy};
 
+  printf ("\n*** Starting %i Random Adventurer Unit Test. ***\n", MAX_TESTS);
   for (i = 0; i < MAX_TESTS; i++)
   {
     //printf("-------------------------------------\n");
@@ -56,7 +58,12 @@ int main (int argc, char** argv) {
 
     if(numCardsAfter - numCards == 2){
       testPass++;
-    } else testFail++;
+    } else {
+      printf("** Failed Test **\n");
+      printf("numCards before: %i\n", numCards);
+      printf("numCards after: %i\n", numCardsAfter);
+      testFail++;
+    }
   }
   //printf("-------------------------------------\n");
   printf("Tests passed: %i\n", testPass);

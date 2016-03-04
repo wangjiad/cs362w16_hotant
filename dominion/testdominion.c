@@ -58,18 +58,18 @@ int main (int argc, char** argv) {
   printf("-----------------[END INITIALIZATION]-----------------\n");
   while (!isGameOver(G)){ //till game is over
      player = whoseTurn(G);
-     printf("It's player %i's turn.\n", player);
+     printf("Player %i's turn.\n", player);
      //printHand(player, G);
      //ACTION PHASE BEGIN
      printf("Number of Actions: %i\n", G->numActions);
-     printf("Searching through hand for an action to play...\n");
+     //printf("Searching through hand for an action to play...\n");
      int x = 0;
 
      //search hand for action
      for (x = 0; x < G->handCount[player]; x++){
         for (i = 0; i < 10; i++){
            if(k[i] == G->hand[player][x]){
-             printf("Found an action called %s from hand position %i\n", cardName(k[i]), x);
+             //printf("Found an action called %s from hand position %i\n", cardName(k[i]), x);
              cardToPlay = k[i];
              handPos = x;
              actionFlag = 1;
@@ -83,16 +83,17 @@ int main (int argc, char** argv) {
      if (actionFlag == 1){
        playChoice = rand() % 1; //50% chance to play or not
        if (playChoice == 0){
-         printf("Player decided to play the action card\n\n");
+         printf("Played the action card %s\n", cardName(cardToPlay));
          playCard(handPos, 0, 0, 0, G);
-       } else {
-         printf("Player decided to not play the action card\n\n");
        }
+      //  else {
+      //    printf("Player decided to not play the action card\n\n");
+      //  }
      }
      //if there are no action cards in the hand
-     if (actionFlag == 0){
-       printf("No actions found, end action phase and start buy phase\n\n");
-     }
+    //  if (actionFlag == 0){
+    //    printf("No actions found, end action phase and start buy phase\n\n");
+    //  }
 
      //BUY PHASE BEGIN
      printf("Number of Buys: %i\n", G->numBuys);
@@ -104,89 +105,82 @@ int main (int argc, char** argv) {
      //1 in 2 chance to decide to attempt buy or not buy
 
      buyChoice = rand() % 2; //whether player tries to buy something or not
-     if (buyChoice == 0) {
-       printf("Player decided not to buy anything\n\n");
-     } else {
-       printf("Player decided to try and buy something!\n");
+    //  if (buyChoice == 0) {
+    //    printf("Player decided not to buy anything\n\n");
+    //  } else {
+      if (buyChoice == 1){
+       //printf("Player decided to try and buy something!\n");
        while (numBuyAttempts > 0){ //while there are still buys left
          ATV = rand() % 3;
          if(ATV == 0){//try to buy an action card
            CSG = rand() % 3;//randomize whether its copper gold of silver
            if (CSG == 0){//copper chosen
-             printf("Player wants to buy %s\n", cardName(4));
+             //printf("Player wants to buy %s\n", cardName(4));
              buyResult = buyCard(4, G);
              if (buyResult != 0){
-               printf("Buy Unsuccessful\n\n");
                numBuyAttempts--;
              } else {
-               printf("Buy successful\n\n");
+               printf("Bought %s\n", cardName(4));
                numBuyAttempts--;
              }
            }else if (CSG == 1){//silver chose
-             printf("Player wants to buy %s\n", cardName(5));
+             //printf("Player wants to buy %s\n", cardName(5));
              buyResult = buyCard(5, G);
              if (buyResult != 0){
-               printf("Buy Unsuccessful\n\n");
                numBuyAttempts--;
              } else {
-               printf("Buy successful\n\n");
+              printf("Bought %s\n", cardName(5));
                numBuyAttempts--;
              }
            }else{//gold chosen
-             printf("Player wants to buy %s\n", cardName(6));
+             //printf("Player wants to buy %s\n", cardName(6));
              buyResult = buyCard(6, G);
              if (buyResult != 0){
-               printf("Buy Unsuccessful\n\n");
                numBuyAttempts--;
              } else {
-               printf("Buy successful\n\n");
+               printf("Bought %s\n", cardName(6));
                numBuyAttempts--;
              }
            }
          }else if(ATV == 1){ //try to buy a treasure card
            EDP = rand() % 3;//randomize whether its copper gold of silver
            if (CSG == 0){//estate chosen
-             printf("Player wants to buy %s\n", cardName(1));
+             //printf("Player wants to buy %s\n", cardName(1));
              buyResult = buyCard(1, G);
              if (buyResult != 0){
-               printf("Buy Unsuccessful\n\n");
                numBuyAttempts--;
              } else {
-               printf("Buy successful\n\n");
+               printf("Bought %s\n", cardName(1));
                numBuyAttempts--;
              }
            }else if (CSG == 1){//duchy chosen
-             printf("Player wants to buy %s\n", cardName(2));
+             //printf("Player wants to buy %s\n", cardName(2));
              buyResult = buyCard(2, G);
              if (buyResult != 0){
-               printf("Buy Unsuccessful\n\n");
                numBuyAttempts--;
              } else {
-               printf("Buy successful\n\n");
+              printf("Bought %s\n", cardName(2));
                numBuyAttempts--;
              }
            }else{//province chosen
-             printf("Player wants to buy %s\n", cardName(3));
+             //printf("Player wants to buy %s\n", cardName(3));
              buyResult = buyCard(3, G);
              if (buyResult != 0){
-               printf("Buy Unsuccessful\n\n");
                numBuyAttempts--;
              } else {
-               printf("Buy successful\n\n");
+               printf("Bought %s\n", cardName(3));
                numBuyAttempts--;
              }
            }
          }else{ //try to buy a kingdom card
            int buyPos = rand() % 10; //randomize spot to buy from
-           printf("Player wants to buy %s\n", cardName(k[buyPos]));
+           //printf("Player wants to buy %s\n", cardName(k[buyPos]));
            //try to buy the card
            buyResult = buyCard(k[buyPos], G);
-
            if (buyResult != 0){
-             printf("Buy Unsuccessful\n\n");
              numBuyAttempts--;
            } else {
-             printf("Buy successful\n\n");
+             printf("Bought %s\n", cardName(k[buyPos]));
              numBuyAttempts--;
            }
          }
