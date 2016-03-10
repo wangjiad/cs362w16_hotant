@@ -1,6 +1,21 @@
-Bug Report 
+Bug Report 1
 Tester: 		Tyler Hotan
-Test code from:	
-Summary of error:   
+Test code from:		Jake Jeffreys
+Summary of error:   	Great Hall Action Count
+
+Great Hall card does not increase action count by 1.
+Error is in following code snippet:
+
+//+1 Actions
+state->numActions;
+
+Number of actions is not actually incremented, only called.
 
 Test code output:
+*** Starting Great Hall Unit Test. ***
+numActions before: 1
+numCards before: 5
+Using Great Hall card.
+numActions after: 1
+numCards after: 5
+Test failed

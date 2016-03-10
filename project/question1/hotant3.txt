@@ -1,6 +1,21 @@
 Bug Report 
 Tester: 		Tyler Hotan
-Test code from:	
-Summary of error:   
+Test code from:		smithgar
+Summary of error:   	Smithy not adding correct amount of cards
+
+Smithy only adds 1 card. It should add 3 cards - 1 discard so the number of cards after should equal 2. 
+Error is in following code snippet:
+
+for (i = 0; i < 2; i++)
+{
+  drawCard(currentPlayer, state);
+}
+
+0 to less than 2 is only 2 iterations until the stopping condition is met.
 
 Test code output:
+
+*** Starting Smithy Unit Test. ***
+numCards before: 5
+numCards after: 6
+Test failed

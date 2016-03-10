@@ -1,6 +1,58 @@
 Bug Report 
 Tester: 		Tyler Hotan
-Test code from:	
-Summary of error:   
+Test code from:		Jake Jeffreys
+Summary of error:   	scoreFor functions reads wrongs score
+
+scoreFor only counts 10 points rather than 13. 10 points from the cards manually put in the hand and 3 more for the 3 estate cards put in deck during initialization.
+Error is in the following code snippet:
+
+  for (i = 0; i < state->discardCount[player]; i++)
+    {
+      if (state->deck[player][i] == curse) { score = score - 1; };
+      if (state->deck[player][i] == estate) { score = score + 1; };
+      if (state->deck[player][i] == duchy) { score = score + 3; };
+      if (state->deck[player][i] == province) { score = score + 6; };
+      if (state->deck[player][i] == great_hall) { score = score + 1; };
+      if (state->deck[player][i] == gardens) { score = score + ( fullDeckCount(player, 0, state) / 10 ); };
+    }
+
+The for loop in scoreFor only iterates up to discardCount, when we are searching through the deck. We need iterate up to deckCount[player] instead. 
+This error is also caught in every random test of my whole game tester. When the scores are printed the first round, every player should start out with a score of 3.
 
 Test code output:
+
+*** Starting scoreFor Unit Test. ***
+Placing 1 curse, 1 estate, 1 duchy, 1 province, and 1 great hall in hand.
+Total points should be 13.
+Calling scoreFor.
+Score: 10
+Test failed
+
+Starting Random Game Test!
+Number of Players: 3
+Kingdom Cards Are: |Cutpurse|Great Hall|Minion|Adventurer|Tribute|Treasure Map|Steward|Village|Council Room|Sea Hag
+-----------------[END INITIALIZATION]-----------------
+Player 0's turn.
+Number of Actions: 1
+Number of Buys: 1
+Bought Estate
+Player 0: 4
+Player 1: 2
+Player 2: 0
+Player 3: 0
+
+Number of players is 3 but each player does NOT have 3 estate cards after initialization is done.
+
+Correct output should look like this:
+
+Starting Random Game Test!
+Number of Players: 3
+Kingdom Cards Are: |Cutpurse|Treasure Map|Village|Baron|Steward|Salvager|Outpost|Sea Hag|Mine|Great Hall
+-----------------[END INITIALIZATION]-----------------
+Player 0's turn.
+Number of Actions: 1
+Number of Buys: 1
+Player 0: 3
+Player 1: 3
+Player 2: 3
+Player 3: 0
