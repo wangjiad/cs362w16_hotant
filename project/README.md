@@ -1,1 +1,1 @@
-Project files can be found in project folder
+Bug reports are named hotant*.txt

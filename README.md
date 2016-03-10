@@ -1,1 +1,1 @@
-Project files can be found in project folder
+Project files can be found in project folder. Each answer has been encapsulated within it's own folder named after the question being answered. Bug reports are in question1 folder and have been communicated to owner oof code via email.

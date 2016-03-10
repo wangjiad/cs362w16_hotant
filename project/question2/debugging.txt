@@ -1,0 +1,1 @@
+Process of finding bug in my own code, and how debugger helped me understand the problem. Describe applicable Agans’ principles. 
