@@ -16,10 +16,12 @@ int main (int argc, char** argv) {
   int k[10] = {adventurer, gardens, embargo, village, minion, mine, cutpurse,
 	       sea_hag, tribute, smithy};
 
+  printf ("*** Starting Steward Random Tester ***\n");
   for (i = 0; i < MAX_TESTS; i++)
   {
+    int timeseed = time(NULL);
+    srand(timeseed);
     //printf("-------------------------------------\n");
-    //printf ("*** Starting Steward Random Test ***\n");
     players = (rand() % 4) + 1;
 		player = rand() % players;
     seed = rand();
@@ -57,8 +59,15 @@ int main (int argc, char** argv) {
     //printf("numCards after: %i\n", numCardsAfter);
     if(numCardsAfter - numCards == 1){
       testPass++;
-    } else testFail++;
-
+    } else {
+      printf("timeseed: %i\n", timeseed);
+      printf("players: %i\n", players);
+      printf("player turn: %i\n", player);
+      printf("numCards before: %i\n", numCards);
+      printf("Using steward with choice = 1\n");
+      printf("numCards after: %i\n", numCardsAfter);
+      testFail++;
+    }
     //printf("*************\n");
     numCards = numHandCards(&G);
     //printf("numCards before: %i\n", numCards);
@@ -75,7 +84,15 @@ int main (int argc, char** argv) {
     //printf("Coins after: %i\n", G.coins);
     if((numCardsAfter == numCards) & (coinAfter-coinBefore == 2)){
       testPass++;
-    } else testFail++;
+    } else {
+      printf("timeseed: %i\n", timeseed);
+      printf("players: %i\n", players);
+      printf("player turn: %i\n", player);
+      printf("Coins before: %i\n", G.coins);
+      printf("Using steward with choice = 2\n");
+      printf("Coins after: %i\n", G.coins);
+      testFail++;
+    }
     //printf("Test passed\n");
 
     G.hand[player][0] = steward;
@@ -89,7 +106,15 @@ int main (int argc, char** argv) {
     //printf("numCards after: %i\n", numCardsAfter);
     if(numCards - numCardsAfter == 3){
       testPass++;
-    } else testFail++;
+    } else {
+      printf("timeseed: %i\n", timeseed);
+      printf("players: %i\n", players);
+      printf("player turn: %i\n", player);
+      printf("numCards before: %i\n", numCards);
+      printf("Using steward with choice = 3\n");
+      printf("numCards after: %i\n", numCardsAfter);
+      testFail++;
+    }
   }
   //printf("-------------------------------------\n");
   printf("Tests passed: %i\n", testPass);
