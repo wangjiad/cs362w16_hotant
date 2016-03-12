@@ -12,6 +12,103 @@ adventurer:
 runTestDominion:
 	gcc -fprofile-arcs -ftest-coverage -Wall -std=c99 dominion.c testdominion.c rngs.c -o testdominion -lm -g
 
+#tarantula makefile stuff
+testcase1:
+	gcc -fprofile-arcs -ftest-coverage -Wall -std=c99 dominion.c testcase1.c rngs.c -o testcase1 -lm -g
+
+testcase2:
+	gcc -fprofile-arcs -ftest-coverage -Wall -std=c99 dominion.c testcase2.c rngs.c -o testcase2 -lm -g
+
+testcase3:
+	gcc -fprofile-arcs -ftest-coverage -Wall -std=c99 dominion.c testcase3.c rngs.c -o testcase3 -lm -g
+
+testcase4:
+	gcc -fprofile-arcs -ftest-coverage -Wall -std=c99 dominion.c testcase4.c rngs.c -o testcase4 -lm -g
+
+testcase5:
+	gcc -fprofile-arcs -ftest-coverage -Wall -std=c99 dominion.c testcase5.c rngs.c -o testcase5 -lm -g
+
+testcase6:
+	gcc -fprofile-arcs -ftest-coverage -Wall -std=c99 dominion.c testcase6.c rngs.c -o testcase6 -lm -g
+
+testcase7:
+	gcc -fprofile-arcs -ftest-coverage -Wall -std=c99 dominion.c testcase7.c rngs.c -o testcase7 -lm -g
+
+testcase8:
+	gcc -fprofile-arcs -ftest-coverage -Wall -std=c99 dominion.c testcase8.c rngs.c -o testcase8 -lm -g
+
+testcase9:
+	gcc -fprofile-arcs -ftest-coverage -Wall -std=c99 dominion.c testcase9.c rngs.c -o testcase9 -lm -g
+
+testcase10:
+	gcc -fprofile-arcs -ftest-coverage -Wall -std=c99 dominion.c testcase10.c rngs.c -o testcase10 -lm -g
+
+testcase11:
+	gcc -fprofile-arcs -ftest-coverage -Wall -std=c99 dominion.c testcase11.c rngs.c -o testcase11 -lm -g
+
+testcase12:
+	gcc -fprofile-arcs -ftest-coverage -Wall -std=c99 dominion.c testcase12.c rngs.c -o testcase12 -lm -g
+
+testout1: testcase1
+	./testcase1 &> testcase1.out
+	gcov dominion.c >> testcase1.out
+	cat dominion.c.gcov >> testcase1.out
+
+testout2: testcase2
+	./testcase2 &> testcase2.out
+	gcov dominion.c >> testcase2.out
+	cat dominion.c.gcov >> testcase2.out
+
+testout3: testcase3
+	./testcase3 &> testcase3.out
+	gcov dominion.c >> testcase3.out
+	cat dominion.c.gcov >> testcase3.out
+
+testout4: testcase4
+	./testcase4 &> testcase4.out
+	gcov dominion.c >> testcase4.out
+	cat dominion.c.gcov >> testcase4.out
+
+testout5: testcase5
+	./testcase5 &> testcase5.out
+	gcov dominion.c >> testcase5.out
+	cat dominion.c.gcov >> testcase5.out
+
+testout6: testcase6
+	./testcase6 &> testcase6.out
+	gcov dominion.c >> testcase6.out
+	cat dominion.c.gcov >> testcase6.out
+
+testout7: testcase7
+	./testcase7 &> testcase7.out
+	gcov dominion.c >> testcase7.out
+	cat dominion.c.gcov >> testcase7.out
+
+testout8: testcase8
+	./testcase8 &> testcase8.out
+	gcov dominion.c >> testcase8.out
+	cat dominion.c.gcov >> testcase8.out
+
+testout9: testcase9
+	./testcase9 &> testcase9.out
+	gcov dominion.c >> testcase9.out
+	cat dominion.c.gcov >> testcase9.out
+
+testout10: testcase10
+	./testcase10 &> testcase10.out
+	gcov dominion.c >> testcase10.out
+	cat dominion.c.gcov >> testcase10.out
+
+testout11: testcase11
+	./testcase11 &> testcase11.out
+	gcov dominion.c >> testcase11.out
+	cat dominion.c.gcov >> testcase11.out
+
+testout12: testcase12
+	./testcase12 &> testcase12.out
+	gcov dominion.c >> testcase12.out
+	cat dominion.c.gcov >> testcase12.out
+#end make tarantula stuff
 
 runAdventurer: adventurer
 	./randomtestadventurer &> randomtestadventurer.out
@@ -31,7 +128,7 @@ testdom: runTestDominion
 	gcov dominion.c >> testdominion.out
 	cat dominion.c.gcov >> testdominion.out
 
-testSuite: runTestDominion adventurer randomcard unit1 unit2 unit3 unit4 card1 card2 card3 card4 
+testSuite: runTestDominion adventurer randomcard unit1 unit2 unit3 unit4 card1 card2 card3 card4
 	./testdominion &> fulltest.out
 	./unittest1 >> fulltest.out
 	./unittest2 >> fulltest.out
@@ -92,7 +189,6 @@ card3:
 card4:
 	gcc -fprofile-arcs -ftest-coverage -Wall -std=c99 dominion.c cardtest4.c rngs.c -o cardtest4 -lm -g
 
-
 myTest:
 	./unittest1 &> unittestresult.out
 	./unittest2 >> unittestresult.out
@@ -120,4 +216,4 @@ player: player.c interface.o
 all: playdom player testDrawCard testBuyCard badTestDrawCard
 
 clean:
-	rm -f *.o playdom.exe playdom testDominion test.exe test player unittest1 unittest2 unittest3 unittest4 cardtest1 cardtest2 cardtest3 cardtest4 player.exe testInit testInit.exe *.gcov *.gcda *.gcno *.so
+	rm -f *.o playdom.exe playdom testDominion test.exe test player testcase1 testcase2 testcase3 testcase4 testcase5 testcase6 testcase7 testcase8 testcase9 testcase10 testcase11 testcase12 unittest1 unittest2 unittest3 unittest4 cardtest1 cardtest2 cardtest3 cardtest4 player.exe testInit testInit.exe *.gcov *.gcda *.gcno *.so

@@ -5,7 +5,7 @@
 #include "rngs.h"
 #include <stdlib.h>
 
-#define MAX_TESTS 1000
+#define MAX_TESTS 1
 
 int main (int argc, char** argv) {
   //testing steward
@@ -19,12 +19,15 @@ int main (int argc, char** argv) {
   printf ("*** Starting Steward Random Tester ***\n");
   for (i = 0; i < MAX_TESTS; i++)
   {
+
     int timeseed = time(NULL);
     srand(timeseed);
     //printf("-------------------------------------\n");
-    players = (rand() % 4) + 1;
+    players = 2;
 		player = rand() % players;
     seed = rand();
+    printf("timeseed: %i\n", timeseed);
+    printf("players: %i\n", players);
     initializeGame(players, k, seed, &G);
 
     G.deckCount[player] = rand() % MAX_DECK; //Pick random deck size out of MAX DECK size
@@ -58,8 +61,17 @@ int main (int argc, char** argv) {
     int numCardsAfter = numHandCards(&G);
     //printf("numCards after: %i\n", numCardsAfter);
     if(numCardsAfter - numCards == 1){
+      printf("-------------PASS1---------\n");
+      printf("timeseed: %i\n", timeseed);
+      printf("players: %i\n", players);
+      printf("player turn: %i\n", player);
+      printf("numCards before: %i\n", numCards);
+      printf("Using steward with choice = 1\n");
+      printf("numCards after: %i\n", numCardsAfter);
       testPass++;
+      printf("----------------------\n");
     } else {
+      printf("------------FAIL1----------\n");
       printf("timeseed: %i\n", timeseed);
       printf("players: %i\n", players);
       printf("player turn: %i\n", player);
@@ -67,6 +79,7 @@ int main (int argc, char** argv) {
       printf("Using steward with choice = 1\n");
       printf("numCards after: %i\n", numCardsAfter);
       testFail++;
+      printf("----------------------\n");
     }
     //printf("*************\n");
     numCards = numHandCards(&G);
@@ -81,17 +94,27 @@ int main (int argc, char** argv) {
     //printf("Using steward with choice = 2\n");
     cardEffect(steward, 2,0,0,&G,0,0);
     coinAfter = G.coins;
-    //printf("Coins after: %i\n", G.coins);
-    if((numCardsAfter == numCards) & (coinAfter-coinBefore == 2)){
-      testPass++;
-    } else {
+    //printf("Coins after: %i\n", G.coins); (numCardsAfter == numCards)
+    if((coinAfter-coinBefore == 2)){
+      printf("------------PASS2----------\n");
       printf("timeseed: %i\n", timeseed);
       printf("players: %i\n", players);
       printf("player turn: %i\n", player);
-      printf("Coins before: %i\n", G.coins);
+      printf("coin before: %i\n", coinBefore);
+      printf("Using steward with choice = 1\n");
+      printf("coin after: %i\n", coinAfter);
+      testPass++;
+      printf("----------------------\n");
+    } else {
+      printf("------------FAIL2----------\n");
+      printf("timeseed: %i\n", timeseed);
+      printf("players: %i\n", players);
+      printf("player turn: %i\n", player);
+      printf("Coins before: %i\n", coinBefore);
       printf("Using steward with choice = 2\n");
-      printf("Coins after: %i\n", G.coins);
+      printf("Coins after: %i\n", coinAfter);
       testFail++;
+      printf("----------------------\n");
     }
     //printf("Test passed\n");
 
@@ -105,8 +128,17 @@ int main (int argc, char** argv) {
     numCardsAfter = numHandCards(&G);
     //printf("numCards after: %i\n", numCardsAfter);
     if(numCards - numCardsAfter == 3){
+      printf("------------PASS3----------\n");
+      printf("timeseed: %i\n", timeseed);
+      printf("players: %i\n", players);
+      printf("player turn: %i\n", player);
+      printf("numCards before: %i\n", numCards);
+      printf("Using steward with choice = 3\n");
+      printf("numCards after: %i\n", numCardsAfter);
       testPass++;
+      printf("----------------------\n");
     } else {
+      printf("------------FAIL3----------\n");
       printf("timeseed: %i\n", timeseed);
       printf("players: %i\n", players);
       printf("player turn: %i\n", player);
@@ -114,6 +146,7 @@ int main (int argc, char** argv) {
       printf("Using steward with choice = 3\n");
       printf("numCards after: %i\n", numCardsAfter);
       testFail++;
+      printf("----------------------\n");
     }
   }
   //printf("-------------------------------------\n");
