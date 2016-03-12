@@ -1,1 +1,0 @@
-When I first starting testing I was overwhelmed. Prior to this class I have no experience testing such a complex and large program that wasn’t coded by me. 
