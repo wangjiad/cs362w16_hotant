@@ -1,9 +1,9 @@
+from __future__ import division
 import sys
 #this program effectively converts a file with many gcov outputs of fails and passes into arrays of integers used to calculate the tarantula formula
 
 totalpassed = 6
 totalfailed = 6
-tarantulaResults = [0] * lenDominion
 
 lineCount = 0 # keeps track of lines
 failPass = 3; # keeps track of fail or pass test case
@@ -12,6 +12,7 @@ lenDominion = 1490 # length of the code being inspected
 flagLine = 1499 # how often the pass/fail flag showsup
 failInc = 1 # holds number of the array we store it to
 passInc = 1
+tarantulaResults = [0] * lenDominion
 # for 6 passing test cases and 6 failing test cases
 passArray1 = [0] * lenDominion
 passArray2 = [0] * lenDominion
@@ -86,8 +87,44 @@ with open(sys.argv[1], 'r') as my_file:
             index = index + 1
         lineCount = lineCount + 1;
 
-print passArray1
-print len(passArray1)
+passed = 0
+failed = 0
 
 for x in range(0,1490):
-    if(failArray[x] > 0):
+    if(failArray1[x] > 0):
+        failed = failed + 1
+    if(failArray2[x] > 0):
+        failed = failed + 1
+    if(failArray3[x] > 0):
+        failed = failed + 1
+    if(failArray4[x] > 0):
+        failed = failed + 1
+    if(failArray5[x] > 0):
+        failed = failed + 1
+    if(failArray6[x] > 0):
+        failed = failed + 1
+
+    if(passArray1[x] > 0):
+        passed = passed + 1
+    if(passArray2[x] > 0):
+        passed = passed + 1
+    if(passArray3[x] > 0):
+        passed = passed + 1
+    if(passArray4[x] > 0):
+        passed = passed + 1
+    if(passArray5[x] > 0):
+        passed = passed + 1
+    if(passArray6[x] > 0):
+        passed = passed + 1
+
+    if (passed == 0 and failed == 0):
+        hue = 0
+    else:
+        hue = (failed/totalfailed)/((passed/totalpassed)+(failed/totalfailed))
+
+    tarantulaResults[x] = hue
+    passed = 0
+    failed = 0
+
+for x in range(0, 1490):
+    print x, ":", tarantulaResults[x]
