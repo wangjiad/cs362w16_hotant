@@ -41,10 +41,10 @@ with open(sys.argv[1], 'r') as my_file:
                 passInc = passInc + 1
 
             if line == "P\n": #sets flag if we are looking at a fail or pass test
-                print("P")
+                #print("P")
                 failPass = 1
             elif line == "F\n":
-                print("F")
+                #print("F")
                 failPass = 0
 
         elif lineCount % flagLine > 8: #filters out useless gcov lines
